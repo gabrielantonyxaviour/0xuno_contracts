@@ -1,5 +1,5 @@
-import { Create2Factory } from "../src/Create2Factory"
-import { ethers } from "hardhat"
+const { Create2Factory } = require("../src/Create2Factory")
+const { ethers } = require("hardhat")
 
 const deployEntryPoint = async function (hre) {
     const provider = ethers.provider
@@ -33,4 +33,4 @@ const deployEntryPoint = async function (hre) {
   */
 }
 
-export default deployEntryPoint
+module.exports = deployEntryPoint

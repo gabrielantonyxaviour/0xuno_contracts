@@ -18,7 +18,7 @@ import "./callback/TokenCallbackHandler.sol";
  *  has execute, eth handling methods
  *  has a single signer that can send requests through the entryPoint.
  */
-contract 0xUNOAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Initializable {
+contract OxUNOAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Initializable {
     using ECDSA for bytes32;
 
     //filler member, to push the nonce and owner to the same slot
@@ -47,7 +47,7 @@ contract 0xUNOAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Ini
 
     IEntryPoint private immutable _entryPoint;
 
-    event 0xUNOAccountInitialized(IEntryPoint indexed entryPoint, address indexed owner);
+    event OxUNOAccountInitialized(IEntryPoint indexed entryPoint, address indexed owner);
 
     modifier onlyOwner() {
         _onlyOwner();
@@ -102,7 +102,7 @@ contract 0xUNOAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Ini
 
     /**
      * @dev The _entryPoint member is immutable, to reduce gas consumption.  To upgrade EntryPoint,
-     * a new implementation of 0xUNOAccount must be deployed with the new EntryPoint address, then upgrading
+     * a new implementation of OxUNOAccount must be deployed with the new EntryPoint address, then upgrading
      * the implementation by calling `upgradeTo()`
      */
     function initialize(address anOwner) public virtual initializer {
@@ -111,7 +111,7 @@ contract 0xUNOAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Ini
 
     function _initialize(address anOwner) internal virtual {
         owner = anOwner;
-        emit 0xUNOAccountInitialized(_entryPoint, owner);
+        emit OxUNOAccountInitialized(_entryPoint, owner);
     }
 
     // Require the function call went through EntryPoint or owner
