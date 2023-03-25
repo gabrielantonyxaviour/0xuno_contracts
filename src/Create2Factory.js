@@ -1,6 +1,5 @@
 // from: https://github.com/Arachnid/deterministic-deployment-proxy
 const { BigNumber, BigNumberish, ethers, Signer } = require("ethers")
-const { arrayify, hexConcat, hexlify, hexZeroPad, keccak256 } = require("ethers/lib/utils")
 const { Provider } = require("@ethersproject/providers")
 const { TransactionRequest } = require("@ethersproject/abstract-provider")
 
@@ -50,7 +49,8 @@ class Create2Factory {
         // manual estimation (its bit larger: we don't know actual deployed code size)
         if (gasLimit === undefined) {
             gasLimit =
-                arrayify(initCode)
+                ethers.utils
+                    .arrayify(initCode)
                     .map((x) => (x === 0 ? 4 : 16))
                     .reduce((sum, x) => sum + x) +
                 (200 * initCode.length) / 2 + // actual is usually somewhat smaller (only deposited code, not entire constructor)
@@ -71,8 +71,8 @@ class Create2Factory {
     }
 
     getDeployTransactionCallData(initCode, salt = 0) {
-        const saltBytes32 = hexZeroPad(hexlify(salt), 32)
-        return hexConcat([saltBytes32, initCode])
+        const saltBytes32 = ethers.utils.hexZeroPad(ethers.utils.hexlify(salt), 32)
+        return ethers.utils.hexConcat([saltBytes32, initCode])
     }
 
     /**
@@ -82,17 +82,19 @@ class Create2Factory {
      * @param salt
      */
     static getDeployedAddress(initCode, salt) {
-        const saltBytes32 = hexZeroPad(hexlify(salt), 32)
+        const saltBytes32 = ethers.utils.hexZeroPad(ethers.utils.hexlify(salt), 32)
         return (
             "0x" +
-            keccak256(
-                hexConcat([
-                    "0xff",
-                    Create2Factory.contractAddress,
-                    saltBytes32,
-                    keccak256(initCode),
-                ])
-            ).slice(-40)
+            ethers.utils
+                .keccak256(
+                    ethers.utils.hexConcat([
+                        "0xff",
+                        Create2Factory.contractAddress,
+                        saltBytes32,
+                        ethers.utils.keccak256(initCode),
+                    ])
+                )
+                .slice(-40)
         )
     }
 
