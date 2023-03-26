@@ -71,7 +71,7 @@ contract OxReceiverUNO is IXReceiver, Ownable, ReentrancyGuard {
         games[gameCode].isStaked[player1] = false;
         games[gameCode].isStaked[player2] = false;
         games[gameCode].totalStake = bet;
-        games[gameCode].isCreated = false;
+        games[gameCode].isCreated = true;
         games[gameCode].isStarted = false;
         games[gameCode].reward = 0;
 

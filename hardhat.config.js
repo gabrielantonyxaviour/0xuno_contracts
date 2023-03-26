@@ -58,6 +58,13 @@ module.exports = {
             accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
             chainId: 10200,
         },
+        gnosis: {
+            url: "https://gnosis.blockpi.network/v1/rpc/public",
+            gasPrice: 2000000000,
+            saveDeployments: true,
+            accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+            chainId: 100,
+        },
     },
     etherscan: {
         // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
@@ -67,6 +74,7 @@ module.exports = {
             polygonMumbai: POLYGONSCAN_API_KEY,
             scroll: ETHERSCAN_API_KEY,
             taiko: ETHERSCAN_API_KEY,
+            gnosis: ETHERSCAN_API_KEY,
         },
         customChains: [
             {
