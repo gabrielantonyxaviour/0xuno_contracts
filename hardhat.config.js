@@ -74,7 +74,7 @@ module.exports = {
             polygonMumbai: POLYGONSCAN_API_KEY,
             scroll: ETHERSCAN_API_KEY,
             taiko: ETHERSCAN_API_KEY,
-            gnosis: ETHERSCAN_API_KEY,
+            gnosis: "6X39Z4P31C9TJ21A769UAYGCF9NPB648RC",
         },
         customChains: [
             {
